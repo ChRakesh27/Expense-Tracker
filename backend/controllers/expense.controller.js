@@ -4,7 +4,7 @@ const getExpenses = async (req, res, next) => {
   try {
     const userId = req.userId;
     const data = await expense.find({ userId });
-    res.status(200).json({ message: "Fetch expense", data });
+    res.status(200).json(data);
   } catch (error) {
     next(error);
   }
@@ -15,8 +15,8 @@ const createExpense = async (req, res, next) => {
     const obj = req.body;
     const userId = req.userId;
     obj.userId = userId;
-    await expense.create(obj);
-    res.status(201).json({ message: "create new expense" });
+    const item = await expense.create(obj);
+    res.status(201).json(item);
   } catch (error) {
     next(error);
   }
@@ -25,10 +25,11 @@ const createExpense = async (req, res, next) => {
 const updateExpenseById = async (req, res, next) => {
   try {
     const userId = req.userId;
-    const id = req.query;
+    const id = req.params.id;
     const obj = req.body;
-    await expense.findByIdAndUpdate(id, obj);
-    res.status(201).json({ message: "Update expense" });
+    console.log("🚀 ~ updateExpenseById ~ obj:", obj, id, userId);
+    await expense.updateOne({ _id: id, userId }, obj);
+    res.status(204).end();
   } catch (error) {
     next(error);
   }
@@ -36,9 +37,10 @@ const updateExpenseById = async (req, res, next) => {
 
 const deleteExpenseById = async (req, res, next) => {
   try {
-    const id = req.query;
-    await expense.findByIdAndDelete(id);
-    res.status(201).json({ message: "delete expense" });
+    const userId = req.userId;
+    const id = req.params.id;
+    await expense.deleteOne({ _id: id, userId });
+    res.status(204).end();
   } catch (error) {
     next(error);
   }
