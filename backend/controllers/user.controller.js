@@ -5,8 +5,19 @@ const bcrypt = require("bcrypt");
 const registerUser = async (req, res, next) => {
   try {
     const obj = req.body;
-    await User.create(obj);
-    res.status(201).json({ message: "create new user" });
+    const user = await User.create(obj);
+    const token = jwt.sign(
+      { userId: user._id, email: user.email },
+      process.env.SECRET_STR,
+      {
+        expiresIn: process.env.JWT_EXPIRE_IN,
+      }
+    );
+    res.status(201).json({
+      access_token: token,
+      expire_in: process.env.JWT_EXPIRE_IN,
+      token_type: "Bearer",
+    });
   } catch (error) {
     next(error);
   }
