@@ -14,12 +14,19 @@ app.use(cors());
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/expenses", expenseRoutes);
 
-// catch 404 and forward to error handler
-app.all("*", function (req, res, next) {
-  res.status(404).json({
-    error: "API not found",
-  });
+const APP_DIR = "../frontend/dist";
+
+app.get("*.*", express.static(path.join(__dirname, APP_DIR)));
+app.all("*", (req, res) => {
+  res.sendFile(path.join(__dirname, APP_DIR, "index.html"));
 });
+
+// catch 404 and forward to error handler
+// app.all("*", function (req, res, next) {
+//   res.status(404).json({
+//     error: "API not found",
+//   });
+// });
 
 // error handler
 app.use(globalErrorHandler);

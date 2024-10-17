@@ -3,6 +3,8 @@ import "./Login.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 function Login() {
+  const API_URL = "/api/v1";
+  // const API_URL = "http://localhost:3001/api/v1/";
   const navigate = useNavigate();
   const [isSignIn, setIsSignIn] = useState(true);
   const [userData, setUserData] = useState({
@@ -16,13 +18,10 @@ function Login() {
     let token;
     if (isSignIn) {
       token = await axios.get(
-        `http://localhost:3001/api/v1/users/login?email=${userData.email}&password=${userData.password}`
+        `${API_URL}/users/login?email=${userData.email}&password=${userData.password}`
       );
     } else {
-      token = await axios.post(
-        `http://localhost:3001/api/v1/users/register`,
-        userData
-      );
+      token = await axios.post(`${API_URL}/users/register`, userData);
     }
     if (token) {
       localStorage.setItem("authToken", JSON.stringify(token.data));

@@ -10,6 +10,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 function Expense() {
+  const API_URL = "/api/v1";
+  // const API_URL = "http://localhost:3001/api/v1/";
   const navigate = useNavigate();
   const [dataSet, setDataSet] = useState([
     {
@@ -49,9 +51,8 @@ function Expense() {
 
     async function fetch() {
       try {
-        const res = await axios.get("http://localhost:3001/api/v1/expenses");
-        // setDataSet();
-        console.log("🚀 ~ fetch ~ res.data:", res.data);
+        const res = await axios.get(API_URL + "/expenses");
+
         setDataSet(res.data);
       } catch (e) {
         console.log("🚀 ~ fetch ~ e:", e);
@@ -93,10 +94,8 @@ function Expense() {
     try {
       const formData = new FormData(formRef.current);
       const newItem = Object.fromEntries(formData.entries());
-      await axios.patch(
-        "http://localhost:3001/api/v1/expenses/" + item._id,
-        newItem
-      );
+
+      await axios.patch(`${API_URL}/expenses/${item._id}`, newItem);
 
       const updatedDataSet = dataSet.map((ele) => {
         if (ele._id === item._id) {
@@ -120,10 +119,8 @@ function Expense() {
     try {
       const formData = new FormData(formRef.current);
       const newItem = Object.fromEntries(formData.entries());
-      const res = await axios.post(
-        "http://localhost:3001/api/v1/expenses",
-        newItem
-      );
+      const res = await axios.post(API_URL + "/expenses", newItem);
+
       setDataSet((val) => [...val, res.data]);
       formRef.current.reset();
       if (!isAddAnother) {
@@ -138,7 +135,7 @@ function Expense() {
     setIsLoading(true);
 
     try {
-      await axios.delete("http://localhost:3001/api/v1/expenses/" + item._id);
+      await axios.delete(`${API_URL}/expenses/${item._id}`);
       setDataSet((val) => val.filter((ele) => ele._id !== item._id));
     } catch (e) {
       console.log("🚀 ~ addItem ~ e:", e);
