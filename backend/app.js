@@ -4,6 +4,7 @@ const globalErrorHandler = require("./middlewares/globalErrorHandler");
 
 const userRoutes = require("./routes/user.routes");
 const expenseRoutes = require("./routes/expense.routes");
+const path = require("path");
 
 const app = express();
 
@@ -14,7 +15,7 @@ app.use(cors());
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/expenses", expenseRoutes);
 
-const APP_DIR = "../frontend/dist";
+const APP_DIR = "../frontend/build";
 
 app.get("*.*", express.static(path.join(__dirname, APP_DIR)));
 app.all("*", (req, res) => {
