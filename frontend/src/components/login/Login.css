@@ -7,6 +7,18 @@
     background: #fff;
 }
 
+.loading {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0007;
+
+}
+
 .form-box {
     max-width: 600px;
     background: #f1f7fe;
