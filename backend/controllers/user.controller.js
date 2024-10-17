@@ -14,6 +14,7 @@ const registerUser = async (req, res, next) => {
       }
     );
     res.status(201).json({
+      userName: obj.userName,
       access_token: token,
       expire_in: process.env.JWT_EXPIRE_IN,
       token_type: "Bearer",
@@ -43,6 +44,7 @@ const loginUser = async (req, res, next) => {
     );
 
     res.status(200).json({
+      userName: user.userName,
       access_token: token,
       expire_in: process.env.JWT_EXPIRE_IN,
       token_type: "Bearer",

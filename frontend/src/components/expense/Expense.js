@@ -13,28 +13,12 @@ function Expense() {
   const API_URL = "/api/v1";
   // const API_URL = "http://localhost:3001/api/v1/";
   const navigate = useNavigate();
-  const [dataSet, setDataSet] = useState([
-    {
-      _id: "670ffd0cb579543d143af1f3",
-      userId: "670fb0911da48ddb18b0d8b9",
-      title: "abc",
-      amount: 234,
-      category: "abc",
-      date: "1970-01-01T00:00:00.000Z",
-    },
-    {
-      _id: "671004b51da7b72af38ea4d6",
-      userId: "670fb0911da48ddb18b0d8b9",
-      title: "abc",
-      amount: 1341,
-      category: "abc",
-      date: "2024-10-03T00:00:00.000Z",
-    },
-  ]);
+  const [dataSet, setDataSet] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isNewItem, setIsNewItem] = useState(true);
   const [isAddAnother, setIsAddAnother] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [userDetails, setUserDetails] = useState("");
   const formRef = useRef(null);
 
   const [item, setItem] = useState({
@@ -45,10 +29,12 @@ function Expense() {
   });
 
   useEffect(() => {
-    if (!localStorage.getItem("authToken")) {
+    const userData = localStorage.getItem("authToken");
+    if (!userData) {
       navigate("/Login");
     }
-
+    const userName = JSON.parse(userData).userName;
+    setUserDetails(userName);
     async function fetch() {
       try {
         const res = await axios.get(API_URL + "/expenses");
@@ -142,6 +128,11 @@ function Expense() {
     }
     setIsLoading(false);
   }
+
+  function logout() {
+    localStorage.removeItem("authToken");
+    navigate("/Login");
+  }
   return (
     <>
       {isLoading && (
@@ -152,6 +143,14 @@ function Expense() {
         </div>
       )}
       <Container>
+        <div className="nav d-flex justify-content-end align-items-center pe-5">
+          <span className="fs-2 me-5">{userDetails}</span>
+          <div>
+            <Button ariant="primary" size="sm" onClick={logout}>
+              Logout
+            </Button>
+          </div>
+        </div>
         <div className="d-flex justify-content-between align-items-center pt-5">
           <h1>EXPENSE TRACKER</h1>
           <div className="me-5 pe-5">

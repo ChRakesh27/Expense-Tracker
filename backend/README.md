@@ -49,6 +49,6 @@ npm run start:dev
 
 ## Postman collection
 
-- postman collection available - [collection link](./postman%20collection/Rakesh%20-%20Task-Manager.postman_collection.json)
+- postman collection available - [collection link](./postman-collection/SIF.postman_collection.json)
 
   ![collection](./postman-collection/collection-img.png)

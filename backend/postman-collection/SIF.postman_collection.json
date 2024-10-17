@@ -1,0 +1,231 @@
+{
+	"info": {
+		"_postman_id": "13667428-0da1-4619-98bc-fae398c88e7b",
+		"name": "SIF",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "35057080"
+	},
+	"item": [
+		{
+			"name": "login",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/api/v1/users/login?email=ra@gmail.com&password=12345678",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"login"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "ra@gmail.com"
+						},
+						{
+							"key": "password",
+							"value": "12345678"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userName\": \"rakesh\",\r\n    \"email\": \"ra@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/users/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"register"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "ra@gmail.com",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "12345678",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create-expenses",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzBmYjA5MTFkYTQ4ZGRiMThiMGQ4YjkiLCJlbWFpbCI6InJhQGdtYWlsLmNvbSIsImlhdCI6MTcyOTA4MjY4NywiZXhwIjoxNzI5MDg2Mjg3fQ.S-T19Y-Hq-tT-BNT0-vusoEM8khiB34iFTjrAAWooRA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"smart1\",\r\n    \"amount\": 100,\r\n    \"category\": \"bills\",\r\n    \"date\": \"12/01/2023\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/expenses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"expenses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-expenses",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzBmYjA5MTFkYTQ4ZGRiMThiMGQ4YjkiLCJlbWFpbCI6InJhQGdtYWlsLmNvbSIsImlhdCI6MTcyOTA4MjY4NywiZXhwIjoxNzI5MDg2Mjg3fQ.S-T19Y-Hq-tT-BNT0-vusoEM8khiB34iFTjrAAWooRA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/api/v1/expenses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"v1",
+						"expenses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update-expenses",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzBmYjA5MTFkYTQ4ZGRiMThiMGQ4YjkiLCJlbWFpbCI6InJhQGdtYWlsLmNvbSIsImlhdCI6MTcyOTE0MjEyMiwiZXhwIjoxNzI5MTQ1NzIyfQ.wevIDeVey4us8DKghbuS8UNPHqSmkn8HDiLufFbsC9A",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"abc1\",\r\n    \"amount\": 234,\r\n    \"category\": \"abc\",\r\n    \"date\": \"1970-01-01T00:00:00.000Z\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/expenses/670ffd0cb579543d143af1f3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"expenses",
+						"670ffd0cb579543d143af1f3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete-expenses",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/expenses/670ffd0cb579543d143af1f3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"expenses",
+						"670ffd0cb579543d143af1f3"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
